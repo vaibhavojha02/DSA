@@ -1,29 +1,27 @@
 class Solution {
-    int dp[1001][1001];
-    bool isPallindrome(int i, int j, string s) {
-       if(i>j){
-         return true;
-       }
-       if(dp[i][j]!=-1){
-        return dp[i][j];
-       }
-       if(s[i]==s[j]){
-         return dp[i][j] =  isPallindrome(i+1,j-1,s);
-       }
-       return dp[i][j] = false;
-    }
-
 public:
     int countSubstrings(string s) {
-        memset(dp,-1,sizeof(dp));
-        int count = 0;
-        for (int i = 0; i < s.size(); i++) {
-            for (int j = i; j < s.size(); j++) {
-                if (isPallindrome(i, j, s)) {
-                    count += 1;
+        int n = s.size();
+        vector<vector<bool>> dp(n, vector<bool>(n, false));
+        int result = 0;
+        // dp[i][j] substring from i to j is pallindrome or not if true then yes and if false then no
+        for (int length = 1; length <= n; length++) {
+            for (int i = 0; i + length - 1 < n; i++) {
+                int j = i + length - 1;
+                if (i == j) {
+                    dp[i][j] = true;
+                } else if (i + 1 == j) {
+                    dp[i][j] = (s[i] == s[j]) ? true : false;
+                } else {
+                    dp[i][j] = (s[i] == s[j] && dp[i + 1][j - 1] == true)
+                                   ? true
+                                   : false;
                 }
+                if (dp[i][j])
+                result += 1;
             }
+           
         }
-        return count;
+        return result;
     }
 };
