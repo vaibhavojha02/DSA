@@ -17,7 +17,7 @@ public:
             return 0;
         }
 
-        int left = solve(root->left, root->val);
+        int left  = solve(root->left, root->val);
         int right = solve(root->right, root->val);
         
         //The longest univalue path will cover nodes on both sides of the root.
