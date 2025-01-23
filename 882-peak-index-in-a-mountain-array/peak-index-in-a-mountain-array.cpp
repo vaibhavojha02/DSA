@@ -12,7 +12,7 @@ public:
     int peakIndexInMountainArray(vector<int>& arr) {
         n = arr.size();
         int low = 0,high = arr.size()-1;
-        int ans = arr.size()-1;
+        int ans = -45353545;
         while(low<=high){
             int mid = (low+high)/2;
             if(check(mid,arr)==true){
