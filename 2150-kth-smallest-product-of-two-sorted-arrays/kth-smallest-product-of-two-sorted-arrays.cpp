@@ -1,43 +1,41 @@
 class Solution {
 public:
-    bool check(long long mid, vector<int>& nums1, vector<int>& nums2,
-               long long k) {
-        long long cnt = 0;
+    using ll = long long;
+    bool isPossible(ll x, vector<int>& nums1, vector<int>& nums2, ll k){
+        int n1 = nums1.size();
         int n2 = nums2.size();
-         for (auto &num : nums1) {
-                if (num == 0) {
-                    if (mid >= 0) cnt += n2;
+        ll count=0;
+        for(int i=0;i<n1;i++){
+            if(nums1[i]<0){
+                ll rem = ceil((double)x/nums1[i]);
+                int ind = lower_bound(nums2.begin(), nums2.end(), rem)-nums2.begin();
+                count += (n2-ind);
+            }else if(nums1[i]>0){
+                ll rem = floor((double)x/nums1[i]);
+                int ind = upper_bound(nums2.begin(), nums2.end(), rem)-nums2.begin();
+                count += ind;
+            }else{
+                if(x>=0){
+                    count += n2;
                 }
-                else if (num > 0) {
-                    double target = (double)mid / num;
-                    int j = upper_bound(begin(nums2), end(nums2), target) - begin(nums2);
-                    cnt += j;
-                }
-                else {
-                    double target = (double)mid / num;
-                    int j = lower_bound(begin(nums2), end(nums2), target) - begin(nums2);
-                    cnt += (n2 - j);
-                }
+            }
+            if(count>=k) return true;
         }
-        return cnt >= k;
+        return count>=k;
     }
-    long long kthSmallestProduct(vector<int>& nums1, vector<int>& nums2,
-                                 long long k) {
-        int n = nums1.size(), m = nums2.size();
-        if (n > m) {
-            return kthSmallestProduct(nums2, nums1, k);
-        }
-
-        long long low = -1e10, high = 1e10;
-
-        long long ans = 0;
-        while (low <= high) {
-            long long mid = low + (high - low) / 2;
-            if (check(mid, nums1, nums2, k)) {
+    ll kthSmallestProduct(vector<int>& nums1, vector<int>& nums2, ll k) {
+        int n1 = nums1.size();
+        int n2 = nums2.size();
+        ll low = -1e10;
+        ll high = 1e10;
+        ll ans=0;
+        while(low<=high){
+            ll mid = low+(high-low)/2;
+            if(isPossible(mid, nums1, nums2, k)){
                 ans = mid;
-                high = mid - 1;
-            } else {
-                low = mid + 1;
+                high = mid-1;
+            }else{
+                low = mid+1;
             }
         }
         return ans;
