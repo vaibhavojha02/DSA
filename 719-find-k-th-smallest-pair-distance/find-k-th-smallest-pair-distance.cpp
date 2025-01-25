@@ -3,8 +3,9 @@ public:
     bool check(vector<int>& nums, int x, int k) {
         int cnt = 0;
         for (int i = 0; i < nums.size(); i++) {
-             int j = upper_bound(nums.begin() + i + 1, nums.end(), nums[i] + x) - nums.begin();
-            cnt += (j - i - 1); // Add t
+            int j = upper_bound(nums.begin()+i+1, nums.end(), x + nums[i]) - nums.begin();
+
+            cnt += (j-i-1);
         }
         return cnt >= k;
     }
