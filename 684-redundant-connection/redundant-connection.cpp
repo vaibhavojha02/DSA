@@ -29,7 +29,7 @@ public:
         int n = edges.size();
         rank.resize(n, 0);
         parent.resize(n);
-        vector<int> res(2);
+        vector<int> ans(2,1);
         for (int i = 0; i < n; i++) {
             parent[i] = i;
         }
@@ -39,12 +39,16 @@ public:
             int x_parent = find(x);
             int y_parent = find(y);
             if (x_parent == y_parent) {
-                  return {x+1,y+1};
+                  ans[0] = x+1;
+                  ans[1] = y+1;
             }
             unionDSU(x, y);
             
 
         }
-        return {};
+        if(ans[0]==-1){
+            return {};
+        }
+        return ans;
     }
 };
