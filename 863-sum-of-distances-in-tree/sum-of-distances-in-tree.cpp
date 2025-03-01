@@ -6,7 +6,8 @@ public:
              int node, int& ans) {
         vis[node] = 1;
         subNodes[node] = 1; // Include itself
-        for (auto& i : adj[node]) {
+        for (auto& i : adj[node])
+        {
             if (vis[i] == -1) {
                 dfs(level + 1, adj, vis, i, ans);
                 ans += level; // Sum distances from root
