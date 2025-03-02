@@ -14,12 +14,12 @@ public:
             string temp = q.front().first;
             int currlevel = q.front().second;
             q.pop();
-            if (temp == end)
-            {
+            if (temp == end) {
                 ans = min(currlevel, ans);
             }
 
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 4; i++)
+            {
                 for (int j = 0; j < 8; j++) {
                     string neigbour = temp;
                     if (neigbour[j] != arr[i]) {
@@ -34,6 +34,6 @@ public:
                 }
             }
         }
-        return ans==INT_MAX ? -1 : ans;
+        return ans == INT_MAX ? -1 : ans;
     }
 };
