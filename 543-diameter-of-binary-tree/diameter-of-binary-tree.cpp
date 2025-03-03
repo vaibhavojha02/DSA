@@ -19,11 +19,11 @@ public:
         }
         int left = solve(temp->left);
         int right = solve(temp->right);
-        ans = max(ans, 1 + left + right);
+        ans = max(ans, left + right);
         return 1 + max(left, right);
     }
     int diameterOfBinaryTree(TreeNode* root) {
         solve(root);
-        return ans-1;
+        return ans;
     }
 };
