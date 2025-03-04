@@ -12,16 +12,18 @@ public:
         long long sum = 0 ;
         if(k==0)return 0;
         
-      long long ans=0;
-        while(!pq.empty()){
-            if(k== 0) break;
-            if(limits[pq.top().second]>0){
-                ans+=pq.top().first;
-                limits[pq.top().second]--;
-                k--;
+        while (!pq.empty()) {
+            int ele = pq.top().first;
+            if (limits[pq.top().second] > 0)
+            {
+                limits[pq.top().second] -= 1;
+                sum += ele;
+                selected++;
             }
+            if (selected == k)
+                break;
             pq.pop();
         }
-        return ans;
+        return sum;
     }
 };
