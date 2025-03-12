@@ -14,8 +14,8 @@ public:
 
                 int l = ((left.find(s[i]) != left.end()) ? left[s[i]] : -1);
                 int r = ((right[s[i]].size() > 0) ? right[s[i]].back() : n);
-                int llen = max(1, i - l);
-                int rlen = max(1, r - i);
+                int llen = max(1, i - l);//for handling case when left is not present;
+                int rlen = r - i;//for handling case when index is present in left instead of righ
                 int len = rlen * llen;
                 ans += len;
                 left[s[i]] = i;
