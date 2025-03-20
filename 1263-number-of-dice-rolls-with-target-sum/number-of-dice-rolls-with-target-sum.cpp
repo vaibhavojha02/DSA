@@ -24,11 +24,6 @@ public:
 
     int numRollsToTarget(int n, int k, int target) {
         memset(dp, -1, sizeof(dp));
-        // if(n==1 && target <= k)return 1;
-        int ans = 0;
-        for (int i = 1; i <= k; i++){
-            ans = (ans % mod + solve(n-1, k, target, i) % mod) % mod;
-        }
-        return ans;
+        return solve(n,k,target,0);
     }
 };
