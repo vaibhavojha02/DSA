@@ -90,7 +90,7 @@ public:
         }
 
         int ans = -1;
-        int low = 0, high = m * n;
+        int low = 0, high = m * n+1;
         while (low <= high) {
             int mid = low + (high - low) / 2;
             if (check(vis, mid)) {
@@ -101,6 +101,6 @@ public:
             }
         }
 
-        return ans == m * n ? 1e9 : ans;
+        return ans == m * n+1 ? 1e9 : ans;
     }
 };
