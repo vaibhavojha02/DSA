@@ -39,7 +39,7 @@ public:
         int room_no = -1;
         for (auto &entry : mp) {
             cout << entry.first << " " << entry.second << " ";
-            if (entry.second > ans || (entry.second == ans && entry.first < room_no)) {  
+            if (entry.second > ans) {  
                 // Ensuring smallest room index is returned in case of tie
                 ans = entry.second;
                 room_no = entry.first;
