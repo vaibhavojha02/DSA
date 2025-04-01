@@ -1,12 +1,19 @@
 class Solution {
 public:
+    
     bool isPalindrome(string s) {
-        string newStr = "";
-        for (char c : s) {
-            if (isalnum(c)) {
-                newStr += tolower(c);
+        int i = 0,j=s.size()-1;
+        while(i<=j){
+            while(i<j && (isalnum(s[i])==false))i++;
+            while(i<j && (isalnum(s[j])==false))j--;
+            cout<<(char)tolower(s[i])<<" "<<(char)tolower(s[j])<<" ";
+            if(tolower(s[i])!=tolower(s[j])){
+                return false;
             }
+            i++;
+            j--;
+            
         }
-        return newStr == string(newStr.rbegin(), newStr.rend());
+        return true;
     }
 };
