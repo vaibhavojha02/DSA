@@ -12,9 +12,10 @@
  */
 class Solution {
 public:
-    // 0 for children is having camera                "camera"
-    //-1  children need camera                         "need"
-    // 1  children is covered think about yourself    "covered"
+    //1) 0 for children is having camera  in left or 
+    // or right child                                    "camera" 
+    //2) -1  children need camera                         "need"
+    //3)  1  children is covered think about yourself    "covered"
     int dfs(TreeNode* root, int& cameras) {
         if (root == nullptr)
             return 1;
@@ -35,5 +36,8 @@ public:
     int minCameraCover(TreeNode* root) {
         int cameras = 0;
         return dfs(root, cameras) == -1 ? cameras + 1 : cameras;
+        //when it return -1 it means root requires camera but as no 
+        //parent is present we will be placing camera on root thatswhy
+        //we are adding extra 1 for this particular case
     }
 };
