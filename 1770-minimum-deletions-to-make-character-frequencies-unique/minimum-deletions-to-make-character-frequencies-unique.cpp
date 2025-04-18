@@ -20,7 +20,8 @@ public:
                 ops++;
                 continue;
             }
-            
+            //if number_to_be_present < 0 which means now we only have to make that frequency equal to zero because we cannot further decrease beyond 0
+        
             if (freq[i] != number_to_be_present) {
                 if (freq[i] <= number_to_be_present){
                     number_to_be_present = max(freq[i] - 1,0);
