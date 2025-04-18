@@ -2,7 +2,8 @@ class Solution {
 public:
     vector<vector<int>> adj;
 
-    void dfs(int node, vector<vector<int>>& mp, vector<int>& newParent, const string& s, const vector<int>& parent) {
+    void dfs(int node, vector<vector<int>>& mp, vector<int>& newParent,
+             const string& s, const vector<int>& parent) {
         char ch = s[node];
         int idx = ch - 'a';
 
@@ -21,13 +22,14 @@ public:
         mp[idx].pop_back();
     }
 
-    int countSubtree(int node, vector<int>& ans, const vector<vector<int>>& tree) {
-        int count = 1;
+    int countSubtree(int node, vector<int>& ans,
+                     const vector<vector<int>>& tree) {
+        int count = 0;
         for (int child : tree[node]) {
             count += countSubtree(child, ans, tree);
         }
-        ans[node] = count;
-        return count;
+        ans[node] = count+1;
+        return count+1;
     }
 
     vector<int> findSubtreeSizes(vector<int>& parent, string s) {
@@ -38,17 +40,14 @@ public:
             adj[parent[i]].push_back(i);
         }
 
-        vector<vector<int>> mp(26);             
+        vector<vector<int>> mp(26);
         vector<int> newParent(n, -1);
 
-        dfs(0, mp, newParent, s, parent);      
+        dfs(0, mp, newParent, s, parent);
 
-       
         vector<vector<int>> tree(n);
         for (int i = 1; i < n; i++) {
-            if (newParent[i] != i && newParent[i] >= 0 && newParent[i] < n) {
-                tree[newParent[i]].push_back(i);
-            }
+            tree[newParent[i]].push_back(i);
         }
 
         vector<int> ans(n, 1);
